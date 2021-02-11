@@ -5,61 +5,44 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>NEWS from the PAST</title>
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,400,700,900" rel="stylesheet" type="text/css" />
       </Head>
 
+      <header className={styles.header}>
+        <div className={styles.logo}>
+          <div className={styles.logonews}>NEWS</div>
+          <div className={styles.logofrom}>from</div>
+          <div className={styles.logothe}>THE</div>
+          <div className={styles.logopast}>PAST</div>
+        </div>
+        <div></div>
+        <div className={styles.menu + " " + styles.current}>World</div>
+        <div className={styles.menu}>Россия</div>
+        <div className={styles.menu}>Наука</div>
+      </header>
+
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+        <div className={styles.theme}>world</div>
+        <div className={styles.news}>
+          <a className={styles.article} href="/" target="_blank">
+            <div className={styles.date}>10 февр. 2021 18:02</div>
+            <div class={styles.title}>США введут санкции из-за военного переворота в Мьянме</div>
+            <div class={styles.publisher}>RT на русском</div>
           </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          <a className={styles.article} href="/" target="_blank">
+            <div className={styles.date}>10 февр. 2021 18:02</div>
+            <div class={styles.title}>США введут санкции из-за военного переворота в Мьянме</div>
+            <div class={styles.publisher}>RT на русском</div>
           </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+          <a className={styles.article} href="/" target="_blank">
+            <div className={styles.date}>10 февр. 2021 18:02</div>
+            <div class={styles.title}>США введут санкции из-за военного переворота в Мьянме</div>
+            <div class={styles.publisher}>RT на русском</div>
           </a>
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }
