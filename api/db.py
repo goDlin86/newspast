@@ -6,8 +6,12 @@ import json
 import nltk
 import pymorphy2
 
+from faunadb import query as q
+from faunadb.objects import Ref
+from faunadb.client import FaunaClient
+from datetime import datetime
+import os
 
-# nltk.download('punkt')
 
 class handler(BaseHTTPRequestHandler):
 
@@ -45,8 +49,20 @@ class handler(BaseHTTPRequestHandler):
                 except:
                     pass
 
+        if len(futr_news) > 0:
+            client = FaunaClient(secret=os.environ.get('DBSECRET'))
+
+            client.query(
+                q.map_(
+                    lambda post: q.create(
+                        q.collection("NewsPast"),
+                        {"data": post}
+                    ),
+                    futr_news
+                ))
+
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(json.dumps({ 'posts': futr_news }).encode())
+        self.wfile.write(json.dumps(futr_news).encode())
         return
