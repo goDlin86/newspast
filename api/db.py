@@ -6,10 +6,12 @@ import json
 import nltk
 import pymorphy2
 
+
+# nltk.download('punkt')
+
 class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        nltk.download('punkt')
         m = pymorphy2.MorphAnalyzer()
 
         theme = 'world'
