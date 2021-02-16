@@ -45,7 +45,16 @@ class handler(BaseHTTPRequestHandler):
                 try:
                     p = m.parse(v)[0]
                     if p.tag.POS == 'VERB' and p.tag.tense == 'futr':
-                        futr_news.append(n)
+                        search = client.query(
+                            q.paginate(
+                                q.match(
+                                    q.index("titlesNews"),
+                                    title
+                                )
+                            ))
+
+                        if not search['data']:
+                            futr_news.append(n)
                 except:
                     pass
 
@@ -64,5 +73,5 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(json.dumps(futr_news).encode())
+        self.wfile.write(json.dumps(futr_news)) #encode ??
         return
