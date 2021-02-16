@@ -24,6 +24,8 @@ class handler(BaseHTTPRequestHandler):
         r = requests.get(url)
         xml = etree.XML(r.content)
 
+        client = FaunaClient(secret=os.environ.get('DBSECRET'))
+
         futr_news = []
         news = []
         for item in xml.find('channel').iterfind('item'):
@@ -59,8 +61,6 @@ class handler(BaseHTTPRequestHandler):
                     pass
 
         if len(futr_news) > 0:
-            client = FaunaClient(secret=os.environ.get('DBSECRET'))
-
             client.query(
                 q.map_(
                     lambda post: q.create(
