@@ -51,7 +51,8 @@ const Main = () => {
                 dataLength={data.news.length}
                 next={fetchData}
                 hasMore={true}
-                style={styles.news}
+                style={{'overflow': 'unset'}}
+                className={styles.news}
                 scrollThreshold={0.95}
                 loader={<p>Загрузка...</p>}
                 endMessage={
