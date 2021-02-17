@@ -44,26 +44,24 @@ const Main = () => {
 
     return (
         <main className={styles.main}>
-          <div className={styles.theme}>{theme}</div>
-          <div className={styles.news}>
-            {data.length === 0 && <p>Загрузка...</p>}
-            {data.news && 
-                <InfiniteScroll 
-                    dataLength={data.news.length}
-                    next={fetchData}
-                    hasMore={true}
-                    style={{'overflow': 'unset'}}
-                    scrollThreshold={0.95}
-                    loader={<p>Загрузка...</p>}
-                    endMessage={
-                        <p style={{textAlign: 'center'}}>
+            <div className={styles.theme}>{theme}</div>
+            {data.news.length === 0 && <p>Загрузка...</p>}
+            {data.news.length > 0 &&
+            <InfiniteScroll 
+                dataLength={data.news.length}
+                next={fetchData}
+                hasMore={true}
+                style={styles.news}
+                scrollThreshold={0.95}
+                loader={<p>Загрузка...</p>}
+                endMessage={
+                    <p style={{textAlign: 'center'}}>
                         <b>Больше нет</b>
-                        </p>
-                    }>
-                    {data.news.map((item, i) => <Item item={item} key={i} />)}
-                </InfiniteScroll>
+                    </p>
+                }>
+                {data.news.map((item, i) => <Item item={item} key={i} />)}
+            </InfiniteScroll>
             }
-          </div>
         </main>
     )
 }
