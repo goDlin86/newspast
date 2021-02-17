@@ -47,8 +47,8 @@ class handler(BaseHTTPRequestHandler):
 
         after = ''
         if 'after' in news:
-            afterDate = albums['after'][0]
-            after = albums['after'][1].id()
+            afterDate = news['after'][0]
+            after = news['after'][1].id()
 
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
