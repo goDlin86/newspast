@@ -50,7 +50,7 @@ class handler(BaseHTTPRequestHandler):
                         search = client.query(
                             q.paginate(
                                 q.match(
-                                    q.index("titlesNews"),
+                                    q.index('titlesNews'),
                                     title
                                 )
                             ))
@@ -64,8 +64,8 @@ class handler(BaseHTTPRequestHandler):
             client.query(
                 q.map_(
                     lambda post: q.create(
-                        q.collection("NewsPast"),
-                        {"data": post}
+                        q.collection('NewsPast'),
+                        {'data': post}
                     ),
                     futr_news
                 ))

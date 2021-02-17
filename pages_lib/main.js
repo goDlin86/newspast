@@ -1,29 +1,45 @@
 import styles from '../styles/Home.module.css'
 
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import Item from './item'
+
 const Main = () => {
+    const [data, setData] = useState([])
     const { theme } = useParams()
+
+    useEffect(() => {
+        fetchData()
+    }, [theme])
+
+    const fetchData = async () => {
+        //setData([])
+
+        try {
+            const data = JSON.stringify({ theme: theme, after: data.after || '', afterDate: data.afterDate || '' })
+
+            const res = await fetch('/api/getNews', { method: 'POST', body: data })
+            const json = await res.json()
+            const results = json || []
+
+            const news = results.news//.map()
+            
+            const d = { 'afterDate': results.afterDate, 'after': results.after, news }
+
+            setData(d)
+
+        } catch(err) {
+            console.error(err)
+        }
+    }
 
     return (
         <main className={styles.main}>
           <div className={styles.theme}>{theme}</div>
           <div className={styles.news}>
-            <a className={styles.article} href="/" target="_blank">
-              <div className={styles.date}>10 февр. 2021 18:02</div>
-              <div class={styles.title}>США введут санкции из-за военного переворота в Мьянме</div>
-              <div class={styles.publisher}>RT на русском</div>
-            </a>
-            <a className={styles.article} href="/" target="_blank">
-              <div className={styles.date}>10 февр. 2021 18:02</div>
-              <div class={styles.title}>США введут санкции из-за военного переворота в Мьянме</div>
-              <div class={styles.publisher}>RT на русском</div>
-            </a>
-            <a className={styles.article} href="/" target="_blank">
-              <div className={styles.date}>10 февр. 2021 18:02</div>
-              <div class={styles.title}>США введут санкции из-за военного переворота в Мьянме</div>
-              <div class={styles.publisher}>RT на русском</div>
-            </a>
+            {data.news.length === 0 && <div>Загрузка...</div>}
+            {data.news.map((item, i) => <Item item={item} key={i} />)}
           </div>
         </main>
     )
