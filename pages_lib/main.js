@@ -38,8 +38,8 @@ const Main = () => {
         <main className={styles.main}>
           <div className={styles.theme}>{theme}</div>
           <div className={styles.news}>
-            {data.news.length === 0 && <div>Загрузка...</div>}
-            {data.news.map((item, i) => <Item item={item} key={i} />)}
+            {data.length === 0 && <div>Загрузка...</div>}
+            {data.news && data.news.map((item, i) => <Item item={item} key={i} />)}
           </div>
         </main>
     )
