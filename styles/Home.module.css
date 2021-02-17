@@ -14,6 +14,7 @@
   right: 0;
   display: grid;
   grid-template-columns: 150px 1fr repeat(3, 150px);
+  z-index: 999;
 }
 .logo {
   margin-left: 20px;

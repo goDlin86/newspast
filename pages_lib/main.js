@@ -5,6 +5,10 @@ import { useParams } from 'react-router-dom'
 
 import Item from './item'
 
+import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+dayjs.locale('ru')
+
 const Main = () => {
     const [data, setData] = useState([])
     const { theme } = useParams()
@@ -17,13 +21,16 @@ const Main = () => {
         //setData([])
 
         try {
-            const data = JSON.stringify({ theme: theme, after: '', afterDate: '' })
+            const data = JSON.stringify({ theme: theme, after: data ? data.after : '', afterDate: data ? data.afterDate : '' })
 
             const res = await fetch('/api/getNews', { method: 'POST', body: data })
             const json = await res.json()
             const results = json || []
 
-            const news = results.news//.map()
+            const news = results.news.map(n => {
+                n.date = dayjs(n.date).format('DD MMM YYYY HH:MM')
+                return n
+            })
             
             const d = { 'afterDate': results.afterDate, 'after': results.after, news }
 
