@@ -11,13 +11,13 @@ const Main = () => {
 
     useEffect(() => {
         fetchData()
-    }, [theme])
+    }, [])
 
     const fetchData = async () => {
         //setData([])
 
         try {
-            const data = JSON.stringify({ theme: theme, after: data.after || '', afterDate: data.afterDate || '' })
+            const data = JSON.stringify({ theme: theme, after: '', afterDate: '' })
 
             const res = await fetch('/api/getNews', { method: 'POST', body: data })
             const json = await res.json()
