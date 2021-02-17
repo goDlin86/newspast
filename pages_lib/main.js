@@ -21,9 +21,10 @@ const Main = () => {
 
     const fetchData = async () => {
         try {
-            const data = JSON.stringify({ theme: theme, after: data ? data.after : '', afterDate: data ? data.afterDate : '' })
-
-            const res = await fetch('/api/getNews', { method: 'POST', body: data })
+            const res = await fetch('/api/getNews', { 
+                method: 'POST', 
+                body: JSON.stringify({ theme, after: data.after, afterDate: data.afterDate }) 
+            })
             const json = await res.json()
             const results = json || []
 
@@ -32,7 +33,9 @@ const Main = () => {
                 return n
             })
 
-            setData({ afterDate: results.afterDate, after: results.after, news: data.news.concat(news) })
+            setData(prevState => {
+                return { afterDate: results.afterDate, after: results.after, news: prevState.news.concat(news) }
+            })
 
         } catch(err) {
             console.error(err)
