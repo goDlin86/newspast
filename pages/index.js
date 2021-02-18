@@ -24,8 +24,8 @@ export default function Home() {
           </div>
           <div></div>
           <NavLink to='world' className={styles.menu} activeClassName={styles.current}>World</NavLink>
-          <NavLink to='russia' className={styles.menu} activeClassName={styles.current}>Россия</NavLink>
-          <NavLink to='science' className={styles.menu} activeClassName={styles.current}>Наука</NavLink>
+          <NavLink to='nation' className={styles.menu} activeClassName={styles.current}>Россия</NavLink>
+          <NavLink to='scitech' className={styles.menu} activeClassName={styles.current}>Наука</NavLink>
         </header>
 
         <Switch>

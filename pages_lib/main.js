@@ -15,7 +15,7 @@ const Main = () => {
     const { theme } = useParams()
 
     useEffect(() => {
-        //setData([])
+        setData({ afterDate: '', after: '', news: [] })
         fetchData()
     }, [theme])
 

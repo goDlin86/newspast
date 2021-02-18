@@ -18,7 +18,7 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         m = pymorphy2.MorphAnalyzer()
 
-        theme = 'world'
+        theme = 'nation'
         url = 'https://news.google.com/news/rss/headlines/section/topic/'+theme.upper()+'.ru_ru/?ned=ru_ru&hl=ru'
 
         r = requests.get(url)
@@ -51,7 +51,7 @@ class handler(BaseHTTPRequestHandler):
                             q.paginate(
                                 q.match(
                                     q.index('titlesNews'),
-                                    title
+                                    n['title']
                                 )
                             ))
 

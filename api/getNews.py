@@ -14,6 +14,7 @@ class handler(BaseHTTPRequestHandler):
         content_len = int(self.headers['content-length'])
         post_body = self.rfile.read(content_len)
         data = json.loads(post_body)
+        theme = data['theme']
         after = data['after']
         afterDate = data['afterDate']
 
@@ -23,7 +24,7 @@ class handler(BaseHTTPRequestHandler):
                 q.map_(
                     lambda x: q.get(q.select(1, x)),
                     q.paginate(
-                        q.match(q.index('newsDesc')),
+                        q.match(q.index('newsDesc'), theme),
                         size=8
                     )
                 )
@@ -34,7 +35,7 @@ class handler(BaseHTTPRequestHandler):
                     q.map_(
                         lambda x: q.get(q.select(1, x)),
                         q.paginate(
-                            q.match(q.index('newsDesc')),
+                            q.match(q.index('newsDesc'), theme),
                             size=8,
                             after=[afterDate, q.ref(q.collection('NewsPast'), after), q.ref(q.collection('NewsPast'), after)]
                         )
