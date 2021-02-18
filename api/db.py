@@ -22,15 +22,15 @@ class handler(BaseHTTPRequestHandler):
 
         futr_news = self.getNews('world', client, m) + self.getNews('nation', client, m) + self.getNews('scitech', client, m)
 
-        # if len(futr_news) > 0:
-        #     client.query(
-        #         q.map_(
-        #             lambda post: q.create(
-        #                 q.collection('NewsPast'),
-        #                 {'data': post}
-        #             ),
-        #             futr_news
-        #         ))
+        if len(futr_news) > 0:
+            client.query(
+                q.map_(
+                    lambda post: q.create(
+                        q.collection('NewsPast'),
+                        {'data': post}
+                    ),
+                    futr_news
+                ))
 
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
@@ -65,16 +65,16 @@ class handler(BaseHTTPRequestHandler):
                 try:
                     p = m.parse(v)[0]
                     if p.tag.POS == 'VERB' and p.tag.tense == 'futr':
-                        # search = client.query(
-                        #     q.paginate(
-                        #         q.match(
-                        #             q.index('titlesNews'),
-                        #             n['title']
-                        #         )
-                        #     ))
+                        search = client.query(
+                            q.paginate(
+                                q.match(
+                                    q.index('titlesNews'),
+                                    n['title']
+                                )
+                            ))
 
-                        # if not search['data']:
-                        result.append(n)
+                        if not search['data']:
+                            result.append(n)
                 except:
                     pass
         
