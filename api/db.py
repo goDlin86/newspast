@@ -18,26 +18,26 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         m = pymorphy2.MorphAnalyzer()
         client = FaunaClient(secret=os.environ.get('DBSECRET'))
-        self.futr_news = []
+        futr_news = []
 
-        self.getNews('world')
-        self.getNews('nation')
-        self.getNews('scitech')
+        futr_news.append(self.getNews('world'))
+        futr_news.append(self.getNews('nation'))
+        futr_news.append(self.getNews('scitech'))
 
-        if len(self.futr_news) > 0:
+        if len(futr_news) > 0:
             client.query(
                 q.map_(
                     lambda post: q.create(
                         q.collection('NewsPast'),
                         {'data': post}
                     ),
-                    self.futr_news
+                    futr_news
                 ))
 
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(json.dumps(self.futr_news).encode())
+        self.wfile.write(json.dumps(futr_news).encode())
         return
 
     def getNews(self, theme):
@@ -60,6 +60,7 @@ class handler(BaseHTTPRequestHandler):
                 'theme': theme
             })
 
+        result = []
         for n in news:
             words = nltk.tokenize.word_tokenize(n['title'])
             for v in words:
@@ -75,6 +76,8 @@ class handler(BaseHTTPRequestHandler):
                             ))
 
                         if not search['data']:
-                            self.futr_news.append(n)
+                            result.append(n)
                 except:
                     pass
+
+        return result
