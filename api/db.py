@@ -40,7 +40,7 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(futr_news).encode())
         return
 
-    def getNews(theme):
+    def getNews(self, theme):
         url = 'https://news.google.com/news/rss/headlines/section/topic/'+theme.upper()+'.ru_ru/?ned=ru_ru&hl=ru'
 
         r = requests.get(url)
