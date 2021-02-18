@@ -24,15 +24,15 @@ class handler(BaseHTTPRequestHandler):
         futr_news.append(self.getNews('nation'))
         futr_news.append(self.getNews('scitech'))
 
-        if len(futr_news) > 0:
-            client.query(
-                q.map_(
-                    lambda post: q.create(
-                        q.collection('NewsPast'),
-                        {'data': post}
-                    ),
-                    futr_news
-                ))
+        # if len(futr_news) > 0:
+        #     client.query(
+        #         q.map_(
+        #             lambda post: q.create(
+        #                 q.collection('NewsPast'),
+        #                 {'data': post}
+        #             ),
+        #             futr_news
+        #         ))
 
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
@@ -40,7 +40,7 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(futr_news).encode())
         return
 
-    def getNews(self, theme):
+    def getNews(theme):
         url = 'https://news.google.com/news/rss/headlines/section/topic/'+theme.upper()+'.ru_ru/?ned=ru_ru&hl=ru'
 
         r = requests.get(url)
