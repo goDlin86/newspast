@@ -66,15 +66,15 @@ class handler(BaseHTTPRequestHandler):
                 try:
                     p = m.parse(v)[0]
                     if p.tag.POS == 'VERB' and p.tag.tense == 'futr':
-                        search = client.query(
-                            q.paginate(
-                                q.match(
-                                    q.index('titlesNews'),
-                                    n['title']
-                                )
-                            ))
+                        # search = client.query(
+                        #     q.paginate(
+                        #         q.match(
+                        #             q.index('titlesNews'),
+                        #             n['title']
+                        #         )
+                        #     ))
 
-                        if not search['data']:
-                            futr_news.append(n)
+                        # if not search['data']:
+                        futr_news.append(n)
                 except:
                     pass
