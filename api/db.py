@@ -20,9 +20,7 @@ class handler(BaseHTTPRequestHandler):
         client = FaunaClient(secret=os.environ.get('DBSECRET'))
         futr_news = []
 
-        self.getNews('world', futr_news)
-        self.getNews('nation', futr_news)
-        self.getNews('scitech', futr_news)
+        futr_news = self.getNews('world') + self.getNews('nation') + self.getNews('scitech')
 
         # if len(futr_news) > 0:
         #     client.query(
@@ -40,7 +38,7 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(futr_news).encode())
         return
 
-    def getNews(self, theme, futr_news):
+    def getNews(self, theme):
         url = 'https://news.google.com/news/rss/headlines/section/topic/'+theme.upper()+'.ru_ru/?ned=ru_ru&hl=ru'
 
         r = requests.get(url)
@@ -60,6 +58,7 @@ class handler(BaseHTTPRequestHandler):
                 'theme': theme
             })
 
+        result = []
         for n in news:
             words = nltk.tokenize.word_tokenize(n['title'])
             for v in words:
@@ -75,6 +74,8 @@ class handler(BaseHTTPRequestHandler):
                         #     ))
 
                         # if not search['data']:
-                        futr_news.append(n)
+                        result.append(n)
                 except:
                     pass
+        
+        return result
