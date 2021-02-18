@@ -20,7 +20,7 @@ class handler(BaseHTTPRequestHandler):
         client = FaunaClient(secret=os.environ.get('DBSECRET'))
         futr_news = []
 
-        futr_news = self.getNews('world') + self.getNews('nation') + self.getNews('scitech')
+        futr_news = self.getNews('world', client, m) + self.getNews('nation', client, m) + self.getNews('scitech', client, m)
 
         # if len(futr_news) > 0:
         #     client.query(
@@ -38,7 +38,7 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(futr_news).encode())
         return
 
-    def getNews(self, theme):
+    def getNews(self, theme, client, m):
         url = 'https://news.google.com/news/rss/headlines/section/topic/'+theme.upper()+'.ru_ru/?ned=ru_ru&hl=ru'
 
         r = requests.get(url)
