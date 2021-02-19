@@ -29,7 +29,7 @@ const Main = () => {
             const json = await res.json()
             const results = json || []
 
-            if (results.news.length === 0) {
+            if (results.news.length < 8) {
                 setHasMore(false)
                 return
             }
