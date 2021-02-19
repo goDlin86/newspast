@@ -74,6 +74,7 @@ class handler(BaseHTTPRequestHandler):
                             ))
 
                         if not search['data']:
+                            n['date'] = datetime.strptime(n['date'], "%a, %d %b %Y %H:%M:%S %Z").isoformat()
                             result.append(n)
                 except:
                     pass
