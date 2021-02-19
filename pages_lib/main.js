@@ -17,6 +17,7 @@ const Main = () => {
 
     useEffect(() => {
         setData({ afterDate: '', after: '', news: [] })
+        setHasMore(true)
         fetchData()
     }, [theme])
 
