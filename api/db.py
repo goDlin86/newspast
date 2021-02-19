@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler
+from urllib.parse import parse_qs
 import requests
 from lxml import etree
 import json
@@ -16,11 +17,16 @@ import os
 class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
+        query = self.path.split('?', 1)
+        params = parse_qs(query[1])
+        theme = params.get('theme', '')[0]
+
         m = pymorphy2.MorphAnalyzer()
         client = FaunaClient(secret=os.environ.get('DBSECRET'))
         futr_news = []
 
-        futr_news = self.getNews('world', client, m) + self.getNews('nation', client, m) + self.getNews('scitech', client, m)
+        # futr_news = self.getNews('world', client, m) + self.getNews('nation', client, m) + self.getNews('scitech', client, m)
+        futr_news = self.getNews(theme, client, m)
 
         if len(futr_news) > 0:
             client.query(
