@@ -32,6 +32,9 @@ const Main = () => {
 
             if (results.news.length < 8) {
                 setHasMore(false)
+            }
+
+            if (results.news.length === 0) {
                 return
             }
 
