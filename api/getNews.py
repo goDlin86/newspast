@@ -22,7 +22,7 @@ class handler(BaseHTTPRequestHandler):
         if len(afterDate) == 0:
             news = client.query(
                 q.map_(
-                    lambda x: q.get(q.select(1, x)),
+                    lambda _, ref: q.get(ref),
                     q.paginate(
                         q.match(q.index('newsDesc'), theme),
                         size=8
@@ -33,7 +33,7 @@ class handler(BaseHTTPRequestHandler):
             if len(after) > 0:
                 news = client.query(
                     q.map_(
-                        lambda x: q.get(q.select(1, x)),
+                        lambda _, ref: q.get(ref),
                         q.paginate(
                             q.match(q.index('newsDesc'), theme),
                             size=8,
@@ -47,6 +47,7 @@ class handler(BaseHTTPRequestHandler):
             n.append(new['data'])
 
         after = ''
+        afterDate = ''
         if 'after' in news:
             afterDate = news['after'][0]
             after = news['after'][1].id()
