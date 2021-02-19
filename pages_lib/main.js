@@ -12,6 +12,7 @@ dayjs.locale('ru')
 
 const Main = () => {
     const [data, setData] = useState({ afterDate: '', after: '', news: [] })
+    const [hasMore, setHasMore] = useState(true)
     const { theme } = useParams()
 
     useEffect(() => {
@@ -28,6 +29,11 @@ const Main = () => {
             const json = await res.json()
             const results = json || []
 
+            if (results.news.length === 0) {
+                setHasMore(false)
+                return
+            }
+
             const news = results.news.map(n => {
                 n.date = dayjs(n.date).format('DD MMM YYYY HH:MM')
                 return n
@@ -39,22 +45,25 @@ const Main = () => {
 
         } catch(err) {
             console.error(err)
+            setHasMore(false)
         }
     }
 
     return (
         <main className={styles.main}>
             <div className={styles.theme}>{theme}</div>
-            {data.news.length === 0 && <p>Загрузка...</p>}
-            {data.news.length > 0 &&
             <InfiniteScroll 
                 dataLength={data.news.length}
                 next={fetchData}
-                hasMore={true}
+                hasMore={hasMore}
                 style={{'overflow': 'unset'}}
                 className={styles.news}
                 scrollThreshold={0.95}
-                loader={<p>Загрузка...</p>}
+                loader={
+                    <p style={{textAlign: 'center'}}>
+                        <b>Загрузка...</b>
+                    </p>
+                }
                 endMessage={
                     <p style={{textAlign: 'center'}}>
                         <b>Больше нет</b>
@@ -62,7 +71,6 @@ const Main = () => {
                 }>
                 {data.news.map((item, i) => <Item item={item} key={i} />)}
             </InfiniteScroll>
-            }
         </main>
     )
 }
