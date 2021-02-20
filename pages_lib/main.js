@@ -16,7 +16,7 @@ const Main = () => {
     const { theme } = useParams()
 
     useEffect(() => {
-        setData({ afterDate: '', after: '', news: [] })
+        setData(prevState => ({ afterDate: '', after: '', news: [] }))
         setHasMore(true)
         fetchData()
     }, [theme])
