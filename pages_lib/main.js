@@ -51,7 +51,7 @@ const Main = () => {
             after = results.after
             afterDate = results.afterDate
 
-            setData(prevState => (prevState.news.concat(news)))
+            setData(prevState => (prevState.concat(news)))
 
         } catch(err) {
             console.error(err)
