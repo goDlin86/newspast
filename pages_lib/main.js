@@ -23,9 +23,10 @@ const Main = () => {
     const fetchData = async (first = false) => {
         try {
             if (first) {
-                setHasMore(true)
                 setNews([])
                 setAfter({ after: '', afterDate: '' })
+                console.log('first')
+                setHasMore(true)
             }
 
             const res = await fetch('/api/getNews', { 
