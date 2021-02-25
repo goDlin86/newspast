@@ -12,22 +12,25 @@ dayjs.locale('ru')
 
 const Main = () => {
     const [news, setNews] = useState([])
-    let [after, setAfter] = useState({ after: '', afterDate: '' })
+    const [after, setAfter] = useState({ after: '', afterDate: '' })
     const [hasMore, setHasMore] = useState(true)
     const { theme } = useParams()
 
     useEffect(() => {
-        setAfter({ after: '', afterDate: '' })
-        setNews([])
-        setHasMore(true)
-        fetchData()
+        fetchData(true)
     }, [theme])
 
-    const fetchData = async () => {
+    const fetchData = async (first = false) => {
         try {
+            if (first) {
+                setHasMore(true)
+                setNews([])
+                setAfter({ after: '', afterDate: '' })
+            }
+
             const res = await fetch('/api/getNews', { 
                 method: 'POST', 
-                body: JSON.stringify({ theme, after: after.after, afterDate: after.afterDate })
+                body: JSON.stringify({ theme, after: first ? '' : after.after, afterDate: first ? '' : after.afterDate })
             })
             const json = await res.json()
             const results = json || []
