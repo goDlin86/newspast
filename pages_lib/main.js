@@ -17,7 +17,7 @@ const Main = () => {
     const { theme } = useParams()
 
     useEffect(() => {
-        setHasMore(false)
+        setHasMore(true)
         setNews([])
         fetchData(true)
     }, [theme])
@@ -31,8 +31,11 @@ const Main = () => {
             const json = await res.json()
             const results = json || []
 
-            if (results.news.length === 0) {
+            if (results.news.length < 8) {
                 setHasMore(false)
+            }
+
+            if (results.news.length === 0) {
                 return
             }
 
@@ -43,7 +46,6 @@ const Main = () => {
 
             setNews(prevState => prevState.concat(news))
             setAfter({ after: results.after, afterDate: results.afterDate })
-            setHasMore(results.news.length === 8)
 
         } catch(err) {
             console.error(err)
@@ -54,7 +56,9 @@ const Main = () => {
     return (
         <main className={styles.main}>
             <div className={styles.theme}>{theme}</div>
-            <InfiniteScroll 
+            {news.length === 0 ? 
+            (<p style={{textAlign: 'center'}}><b>Загрузка...</b></p>) : 
+            (<InfiniteScroll 
                 dataLength={news.length}
                 next={fetchData}
                 hasMore={hasMore}
@@ -72,7 +76,7 @@ const Main = () => {
                     </p>
                 }>
                 {news.map((item, i) => <Item item={item} key={i} />)}
-            </InfiniteScroll>
+            </InfiniteScroll>)}
         </main>
     )
 }
