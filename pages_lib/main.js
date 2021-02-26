@@ -46,6 +46,7 @@ const Main = () => {
 
             setNews(prevState => prevState.concat(news))
             setAfter({ after: results.after, afterDate: results.afterDate })
+            setHasMore(true)
 
         } catch(err) {
             console.error(err)
