@@ -17,18 +17,13 @@ const Main = () => {
     const { theme } = useParams()
 
     useEffect(() => {
+        setHasMore(false)
+        setNews([])
         fetchData(true)
     }, [theme])
 
     const fetchData = async (first = false) => {
         try {
-            if (first) {
-                setNews([])
-                setAfter({ after: '', afterDate: '' })
-                console.log('first')
-                setHasMore(true)
-            }
-
             const res = await fetch('/api/getNews', { 
                 method: 'POST', 
                 body: JSON.stringify({ theme, after: first ? '' : after.after, afterDate: first ? '' : after.afterDate })
