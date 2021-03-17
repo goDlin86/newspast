@@ -65,7 +65,7 @@ class handler(BaseHTTPRequestHandler):
             })
 
         result = []
-        for n in news:
+        for n in news[:20]:
             words = nltk.tokenize.word_tokenize(n['title'])
             for v in words:
                 try:
