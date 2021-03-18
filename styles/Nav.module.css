@@ -1,0 +1,63 @@
+.header {
+    position: fixed;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1240px;
+    padding: 20px 0;
+    background-color: rgba(255,255,255,0.85);
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: 150px 1fr repeat(3, 150px);
+    z-index: 999;
+  }
+  .logo {
+    margin-left: 20px;
+  }
+  .logonews {
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 35px;
+  }
+  .logofrom {
+    display: inline-block;
+    margin-left: 8px;
+    color: #4a4a4a;
+    line-height: 24px;
+  }
+  .logothe {
+    display: inline;
+    font-weight: 700;
+    font-size: 24px;
+    color: #5895ff;
+    line-height: 24px;
+  }
+  .logopast {
+  font-weight: 100;
+    font-size: 34px;
+    line-height: 32px;
+    margin-left: 16px;
+  }
+  .menu {
+    align-self: center;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: 700;
+    transition: all 0.2s ease-in;
+  }
+  .menu:not(.current):hover {
+    color: #ca0000;
+  }
+  .menu.current {
+    background-color: #ca0000;
+    color: white;
+  }
+
+  @media (max-width: 640px) {
+    .header {
+      grid-template-columns: 150px 1fr repeat(3, 80px);
+    }
+    .menu {
+      font-size: 20px;
+    }
+  }

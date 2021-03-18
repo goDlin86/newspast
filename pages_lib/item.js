@@ -4,8 +4,8 @@ const Item = ({ item }) => {
     return (
         <a className={styles.article} href={item.link} target="_blank">
             <div className={styles.date}>{item.date}</div>
-            <div class={styles.title}>{item.title}</div>
-            <div class={styles.publisher}>{item.publisher}</div>
+            <div className={styles.title}>{item.title}</div>
+            <div className={styles.publisher}>{item.publisher}</div>
         </a>
     )
 }
