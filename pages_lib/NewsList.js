@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useSWRInfinite } from 'swr'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import Item from '../pages_lib/item'
+import Item from './Item'
 
 import styles from '../styles/Home.module.css'
 
