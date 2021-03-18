@@ -6,7 +6,7 @@ dayjs.locale('ru')
 export default async (req, res) => {
     const { theme, cursor } = req.query
 
-    const client = new faunadb.Client({ secret: 'fnAECbaDuAACB8gMb_d_k8hZY3IOX7Bb4fWaa0M3'})//process.env.DBSECRET })
+    const client = new faunadb.Client({ secret: process.env.DBSECRET })
     
     let data = {}
     if (cursor) {
