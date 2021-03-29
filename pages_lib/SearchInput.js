@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 
 import SearchList from '../pages_lib/SearchList'
 import dayjs from 'dayjs'
@@ -9,7 +9,7 @@ import styles from '../styles/Home.module.css'
 import stylesSearch from '../styles/SearchInput.module.css'
 
 const monthes = 'Январь_Февраль_Март_Апрель_Май_Июнь_Июль_Август_Сентябрь_Октябрь_Ноябрь_Декабрь'
-const years = '2019_2020_2021'
+const years = '2020_2021'
 
 export default function SearchInput() {
     const today = dayjs()
@@ -30,15 +30,15 @@ export default function SearchInput() {
     return (
         <main className={styles.main}>
             <div className={styles.theme}>Search</div>
-            <div>
-                <select defaultValue={month} onChange={e => setMonth(e.target.value)}>
+            <div className={stylesSearch.inputForm}>
+                <select className={stylesSearch.select} defaultValue={month} onChange={e => setMonth(e.target.value)}>
                     {monthes.split('_').map((month, i) => <option value={i}>{month}</option>)}
                 </select>
-                <select defaultValue={year} onChange={e => setYear(e.target.value)}>
+                <select className={stylesSearch.select} defaultValue={year} onChange={e => setYear(e.target.value)}>
                     {years.split('_').map(year => <option value={year}>{year}</option>)}
                 </select>
 
-                <button onClick={click}>Поиск</button>
+                <button className={stylesSearch.select} onClick={click}>Поиск</button>
             </div>
 
             {dateStart && <SearchList theme='world' dateStart={dateStart} dateEnd={dateEnd} />}
