@@ -52,7 +52,7 @@
 
 @media (max-width: 640px) {
   .news {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
   .article {
     padding: 30px 10px;

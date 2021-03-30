@@ -4,17 +4,17 @@ import 'dayjs/locale/ru'
 dayjs.locale('ru')
 
 export default async (req, res) => {
-    const { theme, cursor } = req.query
+    const { theme, dateStart, dateEnd, cursor } = req.query
 
     const client = new faunadb.Client({ secret: process.env.DBSECRET })
     
     const a = cursor ? cursor.split('_') : []
-    const afterQ = a.length === 2 ? [a[0], q.Ref(q.Collection('NewsPast'), a[1]), q.Ref(q.Collection('NewsPast'), a[1])] : []
+    const afterQ = a.length ? [a[0], q.Ref(q.Collection('NewsPast'), a[1]), q.Ref(q.Collection('NewsPast'), a[1])] : []
 
     const data = await client.query(
         q.Map(
             q.Paginate(
-                q.Match(q.Index('newsDesc'), theme), 
+                q.Range(q.Match(q.Index('newsDesc'), theme), dateStart || '', dateEnd || ''),
                 { 
                     size: 8,
                     after: afterQ
