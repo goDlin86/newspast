@@ -39,8 +39,7 @@ export default function NewsList() {
     const news = data ? data.reduce((all, d) => all.concat(d.news), []) : []
 	
 	const isEmpty = data?.[0]?.length === 0
-	const isReachingEnd =
-		isEmpty || (data && data[data.length - 1]?.news?.length < 8)
+	const isReachingEnd = isEmpty || (data && data[data.length - 1]?.news?.length < 8)
 
 	return (      
         <main className={styles.main}>
