@@ -35,7 +35,7 @@
   transition: all 0.2s ease-in;
 }
 .article:hover {
-  transform: translateY(-3px);
+  background-color: rgba(0,0,0,0.02);
 }
 .date {
   color: rgba(0,0,0,0.2);

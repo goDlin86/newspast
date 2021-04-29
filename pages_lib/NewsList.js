@@ -14,26 +14,25 @@ import styles from '../styles/Home.module.css'
 
 const fetcher = url => fetch(url).then(res => res.json())
 
-export default function NewsList() {
-	const router = useRouter()
-
-    const today = dayjs()
-    const [dateStart, setDateStart] = useState(today.endOf('month').toISOString().slice(0, -5))
+export default function NewsList({ theme, initialData }) {
+    const [dateStart, setDateStart] = useState(dayjs().endOf('month').toISOString().slice(0, -5))
     const [dateEnd, setDateEnd] = useState('')
 
     const setDates = (month, year) => {
-        let date = today.set('month', month)
+        let date = dayjs().set('month', month)
         date = date.set('year', year)
         setDateStart(date.endOf('month').toISOString().slice(0, -5))
         setDateEnd(date.startOf('month').toISOString().slice(0, -5))
     }
 
 	const { data, error, size, setSize } = useSWRInfinite((pageIndex, previousPageData) => {
-			if (previousPageData && !previousPageData.after.length) return null
-			if (pageIndex === 0) return `/api/get?theme=${router.query.theme}&dateStart=${dateStart}&dateEnd=${dateEnd}`
-			return `/api/get?theme=${router.query.theme}&dateStart=${dateStart}&dateEnd=${dateEnd}&cursor=${previousPageData.after}`
+            const prevOrInitialData = previousPageData || initialData
+			if (prevOrInitialData && !prevOrInitialData.after.length) return null
+			if (pageIndex === 0) return `/api/get?theme=${theme}&dateStart=${dateStart}&dateEnd=${dateEnd}`
+			return `/api/get?theme=${theme}&dateStart=${dateStart}&dateEnd=${dateEnd}&cursor=${prevOrInitialData.after}`
 		},
-		fetcher
+		fetcher,
+        { revalidateOnFocus: false, initialData: initialData && [initialData] }
 	)
 	
     const news = data ? data.reduce((all, d) => all.concat(d.news), []) : []
@@ -43,8 +42,8 @@ export default function NewsList() {
 
 	return (      
         <main className={styles.main}>
-            <div className={styles.theme}>{router.query.theme}</div>
-            <SearchInput today={today} setDates={setDates} />
+            <div className={styles.theme}>{theme}</div>
+            <SearchInput today={dayjs()} setDates={setDates} />
             
             <InfiniteScroll 
                 dataLength={news.length}
