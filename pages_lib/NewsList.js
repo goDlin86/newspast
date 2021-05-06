@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
 import { useSWRInfinite } from 'swr'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
