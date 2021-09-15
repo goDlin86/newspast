@@ -34,8 +34,10 @@
   text-decoration: none;
   transition: all 0.2s ease-in;
 }
-.article:hover {
-  background-color: rgba(0,0,0,0.02);
+@media (hover: hover) {
+  .article:hover {
+    background-color: rgba(0,0,0,0.02);
+  }
 }
 .date {
   color: rgba(0,0,0,0.2);
