@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSWRInfinite } from 'swr'
+import useSWRInfinite from 'swr/infinite'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import SearchInput from './SearchInput'
