@@ -13,7 +13,7 @@ import styles from '../styles/Home.module.css'
 
 const fetcher = url => fetch(url).then(res => res.json())
 
-export default function NewsList({ theme, initialData }) {
+export default function NewsList({ theme, fallbackData }) {
     const [dateStart, setDateStart] = useState(dayjs().endOf('month').toISOString().slice(0, -5))
     const [dateEnd, setDateEnd] = useState('')
 
@@ -25,13 +25,13 @@ export default function NewsList({ theme, initialData }) {
     }
 
 	const { data, error, size, setSize } = useSWRInfinite((pageIndex, previousPageData) => {
-            const prevOrInitialData = previousPageData || initialData
+            const prevOrInitialData = previousPageData || fallbackData
 			if (prevOrInitialData && !prevOrInitialData.after.length) return null
 			if (pageIndex === 0) return `/api/get?theme=${theme}&dateStart=${dateStart}&dateEnd=${dateEnd}`
 			return `/api/get?theme=${theme}&dateStart=${dateStart}&dateEnd=${dateEnd}&cursor=${prevOrInitialData.after}`
 		},
 		fetcher,
-        { revalidateOnFocus: false, initialData: initialData && [initialData] }
+        { revalidateOnFocus: false, fallbackData: fallbackData && [fallbackData] }
 	)
 	
     const news = data ? data.reduce((all, d) => all.concat(d.news), []) : []

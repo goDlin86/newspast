@@ -26,7 +26,7 @@ export default async (req, res) => {
 
     let news = data['data'].map(n => n['data'])
     news = news.map(n => {
-        n.date = dayjs(n.date).format('DD MMM YYYY HH:MM')
+        n.date = dayjs(n.date).format('DD MMM YYYY HH:mm')
         return n
     })
 
