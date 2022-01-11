@@ -1,0 +1,23 @@
+name: db
+
+on:
+  schedule:
+    - cron:  '0 10 * * *'
+
+jobs:
+  db-get:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: send to db world
+      uses: wei/curl@v1
+      with:
+        args: 'https://newspast.vercel.app/api/db?theme=world'
+    - name: send to db nation
+      uses: wei/curl@v1
+      with:
+        args: 'https://newspast.vercel.app/api/db?theme=nation'
+    - name: send to db scitech
+      uses: wei/curl@v1
+      with:
+        args: 'https://newspast.vercel.app/api/db?theme=scitech'
