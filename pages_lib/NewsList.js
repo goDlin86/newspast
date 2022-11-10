@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import useSWRInfinite from 'swr/infinite'
 import InfiniteScroll from 'react-infinite-scroll-component'

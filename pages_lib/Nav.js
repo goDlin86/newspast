@@ -1,10 +1,12 @@
+'use client'
+
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useSelectedLayoutSegments } from 'next/navigation'
 
 import styles from '../styles/Nav.module.css'
 
 export default function Nav() {
-    const { asPath } = useRouter()
+    const [selectedLayoutSegment] = useSelectedLayoutSegments()
 
     return (
         <header className={styles.header}>
@@ -15,15 +17,9 @@ export default function Nav() {
                 <div className={styles.logopast}>PAST</div>
             </div>
             <div></div>
-            <Link href="/[theme]" as='/world'>
-                <a className={asPath === '/world'? styles.menu + ' ' + styles.current : styles.menu}>World</a>
-            </Link>
-            <Link href="/[theme]" as='/nation'>
-                <a className={asPath === '/nation'? styles.menu + ' ' + styles.current : styles.menu}>Россия</a>
-            </Link>
-            <Link href="/[theme]" as='/scitech'>
-                <a className={asPath === '/scitech'? styles.menu + ' ' + styles.current : styles.menu}>Наука</a>
-            </Link>
+            <Link href='/world' className={selectedLayoutSegment === 'world' ? styles.menu + ' ' + styles.current : styles.menu}>World</Link>
+            <Link href='/nation' className={selectedLayoutSegment === 'nation' ? styles.menu + ' ' + styles.current : styles.menu}>Россия</Link>
+            <Link href='/scitech' className={selectedLayoutSegment === 'scitech' ? styles.menu + ' ' + styles.current : styles.menu}>Наука</Link>
         </header>
     )
 }

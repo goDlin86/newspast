@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 
 import stylesSearch from '../styles/SearchInput.module.css'
