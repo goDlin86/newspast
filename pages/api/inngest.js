@@ -7,9 +7,9 @@ const getNews = inngest.createFunction(
   { name: 'Get news' }, 
   { cron: '0 */6 * * *' }, 
   async ({ event, step }) => {
-    await step.run('db world', async () => await get('world'))
-    await step.run('db nation', async () => await get('nation'))
-    await step.run('db scitech', async () => await get('scitech'))
+    await step.run('db world', async () => { return await get('world') })
+    await step.run('db nation', async () => { return await get('nation') })
+    await step.run('db scitech', async () => { return await get('scitech') })
   }
 )
 
