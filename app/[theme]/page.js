@@ -1,4 +1,4 @@
-import NewsList from '../../pages_lib/NewsList'
+import NewsList from '../../components/NewsList'
 
 export default function Page({ params }) {
     return (

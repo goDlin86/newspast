@@ -1,7 +1,7 @@
 import { Inngest } from 'inngest'
 import { serve } from 'inngest/next'
 
-export const inngest = new Inngest({ name: 'newspast' })
+export const inngest = new Inngest({ id: 'newspast' })
 
 const getNews = inngest.createFunction(
   { name: 'Get news' }, 
@@ -14,8 +14,13 @@ const getNews = inngest.createFunction(
 )
 
 const get = async (theme) => {
-  const res = await fetch('https://newspast.vercel.app/api/db?theme=' + theme)// + '&secret=' + process.env.SECRET_TOKEN)
+  const res = await fetch('https://newspast.vercel.app/api/db?theme=' + theme + '&secret=' + process.env.SECRET_TOKEN)
   return await res.json()
 }
 
-export default serve(inngest, [ getNews ])
+export const { GET, POST, PUT } = serve({
+  client: inngest,
+  functions: [
+    getNews
+  ],
+})

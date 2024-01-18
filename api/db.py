@@ -20,6 +20,11 @@ class handler(BaseHTTPRequestHandler):
         query = self.path.split('?', 1)
         params = parse_qs(query[1])
         theme = params.get('theme', '')[0]
+        secret = params.get('secret', '')[0]
+
+        if secret != os.environ.get('SECRET_TOKEN'):
+            self.send_error(401, 'Invalid token')
+            return
 
         m = pymorphy2.MorphAnalyzer()
         client = FaunaClient(secret=os.environ.get('DBSECRET'))

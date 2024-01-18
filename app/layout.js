@@ -1,4 +1,4 @@
-import Nav from '../pages_lib/Nav'
+import Nav from '../components/Nav'
 
 import '../styles/globals.css'
 import styles from '../styles/Home.module.css'
