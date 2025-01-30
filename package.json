@@ -7,13 +7,13 @@
     "start": "next start"
   },
   "dependencies": {
-    "dayjs": "^1.10.4",
-    "faunadb": "^4.1.1",
+    "dayjs": "^1",
+    "faunadb": "^4",
     "inngest": "^3",
-    "next": "^14",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-infinite-scroll-component": "^6.0.0",
-    "swr": "^2.0.0"
+    "next": "^15",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-infinite-scroll-component": "^6",
+    "swr": "^2"
   }
 }

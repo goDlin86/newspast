@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server'
 import faunadb, { query as q } from 'faunadb'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
@@ -39,5 +38,5 @@ export async function GET(request) {
   if (data['after'])
     after = data['after'][0] + '_' + data['after'][1]['value'].id
   
-  return NextResponse.json({ news, after })
+  return Response.json({ news, after })
 }
