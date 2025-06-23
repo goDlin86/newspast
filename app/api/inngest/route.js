@@ -14,7 +14,7 @@ const getNews = inngest.createFunction(
 )
 
 const get = async (theme) => {
-  const res = await fetch('https://nextjs-flask-starter-sigma-five.vercel.app/api/db?theme=' + theme + '&secret=' + process.env.SECRET_TOKEN)
+  const res = await fetch('https://newspast.vercel.app/api/db?theme=' + theme + '&secret=' + process.env.SECRET_TOKEN)
   return await res.json()
 }
 

@@ -1,4 +1,3 @@
-import faunadb, { query as q } from 'faunadb'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
 dayjs.locale('ru')
@@ -9,24 +8,22 @@ export async function GET(request) {
   const dateStart = searchParams.get('dateStart')
   const dateEnd = searchParams.get('dateEnd')
   const cursor = searchParams.get('cursor')
-
-  const client = new faunadb.Client({ secret: process.env.DBSECRET })
-  
+ 
   const a = cursor ? cursor.split('_') : []
-  const afterQ = a.length ? [a[0], q.Ref(q.Collection('NewsPast'), a[1]), q.Ref(q.Collection('NewsPast'), a[1])] : []
+  // const afterQ = a.length ? [a[0], q.Ref(q.Collection('NewsPast'), a[1]), q.Ref(q.Collection('NewsPast'), a[1])] : []
 
-  const data = await client.query(
-    q.Map(
-      q.Paginate(
-        q.Range(q.Match(q.Index('newsDesc'), theme), dateStart || '', dateEnd || ''),
-        { 
-          size: 8,
-          after: afterQ
-        }
-      ),
-      q.Lambda((x, ref) => q.Get(ref))
-    )
-  )
+  // const data = await client.query(
+  //   q.Map(
+  //     q.Paginate(
+  //       q.Range(q.Match(q.Index('newsDesc'), theme), dateStart || '', dateEnd || ''),
+  //       { 
+  //         size: 8,
+  //         after: afterQ
+  //       }
+  //     ),
+  //     q.Lambda((x, ref) => q.Get(ref))
+  //   )
+  // )
 
   let news = data['data'].map(n => n['data'])
   news = news.map(n => {

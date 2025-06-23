@@ -7,8 +7,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@vercel/postgres": "^0.10.0",
     "dayjs": "^1",
-    "faunadb": "^4",
     "inngest": "^3",
     "next": "^15",
     "react": "^19",
