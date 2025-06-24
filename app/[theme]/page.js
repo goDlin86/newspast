@@ -1,7 +1,7 @@
 import NewsList from '../../components/NewsList'
 
-export default function Page({ params }) {
+export default async function Page({ params }) {
     return (
-        <NewsList theme={params.theme} />
+        <NewsList theme={(await params).theme} />
     )
 }

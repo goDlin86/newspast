@@ -5,7 +5,7 @@ import { useState } from 'react'
 import stylesSearch from '../styles/SearchInput.module.css'
 
 const monthes = 'Январь_Февраль_Март_Апрель_Май_Июнь_Июль_Август_Сентябрь_Октябрь_Ноябрь_Декабрь'
-const years = '2021_2022_2023_2024_2025'
+const years = '2025'
 
 export default function SearchInput({ today, setDates }) {
     const [month, setMonth] = useState(today.month())
