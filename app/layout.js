@@ -1,4 +1,5 @@
 import Nav from '../components/Nav'
+import { Analytics } from '@vercel/analytics/react'
 
 import '../styles/globals.css'
 import styles from '../styles/Home.module.css'
@@ -19,6 +20,7 @@ export default function Layout({ children }) {
                 <div className={styles.container}>
                     <Nav />
                     {children}
+                    <Analytics />
                 </div>
             </body>
         </html>
