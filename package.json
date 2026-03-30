@@ -7,10 +7,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@vercel/analytics": "^1",
+    "@vercel/analytics": "^2",
     "@vercel/postgres": "^0.10.0",
     "dayjs": "^1",
-    "inngest": "^3",
+    "inngest": "^4",
     "next": "^16",
     "react": "^19",
     "react-dom": "^19",
