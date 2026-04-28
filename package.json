@@ -14,7 +14,7 @@
     "next": "^16",
     "react": "^19",
     "react-dom": "^19",
-    "react-infinite-scroll-component": "^6",
+    "react-infinite-scroll-component": "^7",
     "swr": "^2"
   }
 }
